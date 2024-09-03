@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bienvenido a su boda Alexia y Luis</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/novios-styles.css">
+  <!-- <link rel="stylesheet" href="css/font-awesome.min.css"> -->
+  <link rel="stylesheet" href="../css/font-awesome.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+
+<body>
+  <header>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6">
+          <h3>Bienvenido a su boda Alexia y Luis</h3>
+        </div>
+        <div class="col-md-6 text-right">
+          <button class="btn btn-danger" id="cerrar-sesion">Cerrar Sesión</button>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main>
+    <div class="container-fluid centrar">
+      <div class="row flex-sm-row">
+        <div class="col-xs-4">
+          <div class="card text-center" id="lista-invitados">
+            <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs"
+              type="module"></script>
+
+            <dotlottie-player src="https://lottie.host/1672d5c2-c81b-4464-bf01-71ad2aa939d1/ZbDAjmMyco.json"
+              background="transparent" speed="1" style="width: 100px; height: 100px;" loop autoplay></dotlottie-player>
+            <p class="card-title">Lista de<br> Invitados</p>
+          </div>
+        </div>
+        <div class="col-xs-4" style="margin-left: 20px; margin-right: 20px;">
+          <div class="card text-center" id="lista-proveedores">
+            <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs"
+              type="module"></script>
+
+            <dotlottie-player src="https://lottie.host/07145793-ca77-4364-8e5f-e219703f528e/N5SqIWE8lh.json"
+              background="transparent" speed="1" style="width: 100px; height: 100px;" loop autoplay></dotlottie-player>
+            <p class="card-title">Lista de <br> Proveedores</p>
+          </div>
+        </div>
+        <div class="col-xs-4">
+          <div class="card text-center" id="lista-pedidos">
+            <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs"
+              type="module"></script>
+
+            <dotlottie-player src="https://lottie.host/7a72b80e-5891-43bb-8afd-82f91ed4a198/ns3uw4gs1e.json"
+              background="transparent" speed="1" style="width: 100px; height: 100px;" loop autoplay></dotlottie-player>
+            <p class="card-title">Lista de<br> Pedidos</p>
+          </div>
+        </div>
+      </div>
+      <div id="contenido"></div>
+    </div>
+  </main>
+  <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script> -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+  <script src="js/novios-scripts.js"></script>
+</body>
+
+<div class="modal fade" id="AgregarFamilia" tabindex="-1" role="dialog" aria-labelledby="agregarFamily"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="agregarFamily">Agregar Familia</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <input type="text" class="form-control" id="familia" placeholder="Familia" maxlength="150">
+            <button type="button" class="btn btn-primary" id="add-integrante">Agregar integrante</button>
+          </div>
+          <div id="integrantes">
+            <div class="row-group">
+              <div id="row-1">
+                <div class="form-group" style="display: inline-block; width: 40%">
+                  <input type="text" class="form-control" id="nombre" placeholder="Nombre" maxlength="100"
+                    name="integrantes[]">
+                </div>
+                <div class="form-group" style="display: inline-block; width: 40%">
+                  <input type="text" class="form-control" id="apellido-paterno" placeholder="Apellidos" maxlength="100"
+                    name="integrantes[]">
+                </div>
+                <div class="form-group" style="display: inline-block; width: 15%">
+                  <button type="button" class="btn btn-danger" id="eliminar"><i class="fa fa-trash-o"
+                      aria-hidden="true"></i></button>
+                </div>
+              </div>
+              <div id="row-1" style="display: flex; align-items: center;">
+                <div class="form-group" style="width: 40%;">
+                  <input type="text" class="form-control" id="celular" placeholder="Celular" maxlength="100"
+                    name="integrantes[]">
+                </div>
+                <div class="form-check" style="width: 55%; margin-left: 10px;">
+                  <input class="form-check-input" type="checkbox" value="" id="llamar1">
+                  <label class="form-check-label" for="llamar1">
+                    Llamar para confirmar asistencia
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" id="guardar-familia">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</html>

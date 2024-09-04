@@ -51,9 +51,9 @@ class Database
   public function generarQrCode($code)
   {
     var_dump("entro");
-    $path = "images/qrs/";
+    $path = dirname(dirname(__DIR__))."/images/qrs/";
     $QrCode = $path . $code . ".png";
-    QRcode::png($code, $QrCode,'H', 4, 4);
+    QRcode::png($code, $QrCode, 'H', 4, 4);
     return $QrCode;
   }
 
@@ -64,11 +64,15 @@ class Database
       $codigoFam = $this->generarCodigo();
       $qrCode = $this->generarQrCode($codigoFam);
       var_dump($qrCode);
-      if(file_exists($qrCode)){
+      if (file_exists($qrCode)) {
         $sqlFam = "INSERT INTO Familia (Cantidad, Nombre, Confirmado, Id_Evento, Codigo) VALUES(2,'" . $familia . "', false, 1, '" . $codigoFam . "');";
         $result = $this->query($sqlFam);
+        $ultimoId = $this->conn->lastInsertId(); // Obtener el último ID insertado
+        var_dump($ultimoId);
+        
         var_dump($result);
       }
+      // echo  dirname(dirname(__DIR__));
     } catch (PDOException $e) {
       echo "Error en la consulta: " . $e->getMessage();
       return false;

@@ -251,9 +251,9 @@
                 border: 1p;
             }
 
-            .logo-boton {
+            /* .logo-boton {
                 top: 68%;
-            }
+            } */
 
             .overlay-div {
                 width: 80%;
@@ -329,7 +329,7 @@
                     <p>José Raúl de León García</p>
                 </div>
             </div>
-            <div class="segment">
+            <div class="segment" id="novios">
                 <p style="text-align: center;">TENEMOS EL HONOR DE
                     INVITARLOS A NUESTRA BODA</p>
                 <div class="home-slider">
@@ -342,7 +342,7 @@
                 </div>
             </div>
             <!-- Segmento de imagenes -->
-            <div class="segment">
+            <div class="segment" id="fotos">
                 <div class="timeLine">
                     <div class="row">
                         <div class="lineHeader hidden-sm hidden-xs"></div>
@@ -351,9 +351,9 @@
                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 item">
                             <div class="caption">
                                 <div class="star center-block">
-                                    <span class="h3">01</span>
-                                    <span>March </span>
-                                    <span>2017</span>
+                                    <span class="h3">26</span>
+                                    <span>Agosto </span>
+                                    <span>2014</span>
                                 </div>
                                 <div class="image">
                                     <img src="images/times-01.jpg" alt />
@@ -542,8 +542,9 @@
                 <p style="text-align: center; font-size: 10px;">TU PRESENCIA
                     ES IMPORTANTE PARA NOSOTROS</p>
 
-                <div class="center-btn qr">
-                    <img src="images/qr.png">
+                <div class="center-btn qrcode">
+                    <canvas id="qr-code"></canvas>
+                    <!-- <img src="images/qr.png"> -->
                 </div>
 
             </div>
@@ -577,88 +578,15 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/qrious@latest/dist/qrious.min.js"></script>
+
     <script>
-        $(document).ready(function () {
-
-            handleClick();
-
-            function handleClick() {
-                const button = document.getElementById('myButton');
-
-                // Añadir la clase 'active' para el efecto de clic
-                button.classList.add('active');
-
-                // Eliminar la clase 'active' después de un pequeño retraso
-                setTimeout(() => {
-                    button.classList.remove('active');
-                }, 200); // 200 ms es suficiente para simular el efecto de clic
-
-                const overlayDiv = document.getElementsByClassName('overlay-div')[0];
-                const tamanioSobre = document.getElementsByClassName('centered-div')[0];
-
-                const observer = new MutationObserver(() => {
-                    if (overlayDiv.classList.contains('show')) {
-                        const alto = screen.width;
-                        const heightContenidoPrincipal = overlayDiv.offsetHeight;
-                        const heightSobre = tamanioSobre.offsetHeight;
-                        let tamanioContenidoPrincipal = 0;
-                        let posicionAlturaContenidoPrincipal= 0;
-
-                        $("#alto").text(alto);
-                        if (alto >= 768 && alto <= 1024) {
-                            tamanioContenidoPrincipal = heightContenidoPrincipal - 115;
-                        }
-                        else if (alto < 768) {
-                            tamanioContenidoPrincipal = heightContenidoPrincipal + 10;
-                            posicionAlturaContenidoPrincipal = heightSobre -175;
-                        }
-                        $("#overlayDiv").css({ top: posicionAlturaContenidoPrincipal + 'px' });
-                        $(".new-div").css({ top: tamanioContenidoPrincipal + 'px' });
-
-                        observer.disconnect();
-                    }
-                });
-                observer.observe(overlayDiv, { attributes: true });
-                setTimeout(() => {
-                    button.classList.remove('active');
-                    overlayDiv.classList.toggle('show');
-                }, 200);
-            }
-
-            $("#confirmacion").click(function () {
-                Swal.fire({
-                    title: "¿Asistirá a la boda?",
-                    // text: "A continuación se abrirá WhatsApp para confirmar asistencia",
-                    icon: "info",
-                    showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    confirmButtonText: "Si",
-                    cancelButtonText: "No"
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        Swal.fire({
-                            position: "center",
-                            icon: "success",
-                            title: "Confirmación aceptada",
-                            text: "Se abrirá su WhatsApp para confirmar su asistencia con la organizadora del evento.",
-                            showConfirmButton: false,
-                            timer: 4500,
-                            willClose: () => {
-                                confirmacionAsistencia();
-                            }
-                        });
-                    }
-                });
-            });
-
-            function confirmacionAsistencia() {
-                console.log("Se realiza confirmacion de invitacion")
-            }
-
-        });
+        
+        
     </script>
     <!-- ALL JS FILES -->
+    <script src="js/principal.js"></script>
     <script src="js/jquery.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>

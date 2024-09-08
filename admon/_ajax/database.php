@@ -1,6 +1,7 @@
 <?php
 
-require_once '../../cnx/db.php';
+require_once '/home/invitation/connections/db.php';
+// require_once '../../../cnx/db.php';
 require_once '../../phpqrcode/qrlib.php';
 
 

@@ -10,3 +10,12 @@ if(isset($_POST['guardarInvitados'])){
     echo $result;
 }
 
+
+if(isset($_POST['obtenerInfoInvitados'])){
+    if(isset($_POST['code'])){
+        $database = new Database();
+        
+        $result = $database -> getInvitaInfo($_POST['code']);
+        return $result;
+    }
+}

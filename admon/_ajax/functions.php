@@ -24,7 +24,7 @@ class Functions
         $codigoFam = generarCodigo();
         $conn = $this->db->getConnection();
         var_dump($familia);
-        var_dump($integrante);
+        var_dump($integrantes);
         // $sql = "INSERT INTO familia (familia, integrantes) VALUES (:familia, :integr";
         // foreach ($integrantes as $integrante) {
         //     $sql = "INSERT INTO your_table (familia, integrante) VALUES ('$familia', '$integrante')";

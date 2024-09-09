@@ -10,9 +10,42 @@ $(document).ready(function () {
         level: 'H'  // Nivel de corrección de errores (L, M, Q, H)
     });
 
+    function cargaDatos() {
+        const codeValue = document.getElementById('code').value;
+        $.ajax({
+            type: 'POST',
+            url: '_ajax/_ajax.php',
+            data: {
+                obtenerInfoInvitados: 1,
+                code: codeValue
+            },
+            success: function (data) {
+                console.log(data);
+                const jsonData = JSON.parse(data); // Decodificar el JSON
+                console.log(jsonData); 
+                var totalInvitados = jsonData.length;
+                if(totalInvitados == 1){
+                    var cadenaNombre = jsonData[0].nombre + ' ' + jsonData[0].App;
+                    listaNombres.push(cadenaNombre);
+                    $("#nombreInvitados").text(cadenaNombre);
+                }else{
 
+                }
 
+                $("#num-pases").text(totalInvitados);
+
+                console.log(jsonData.nombre);
+                console.log('Data sent successfully!');
+            },
+            error: function (xhr, status, error) {
+                console.log('Error sending data: ' + error);
+            }
+        });
+    }
+
+    
     handleClick();
+    cargaDatos();
 
     function handleClick() {
         const button = document.getElementById('myButton');
@@ -30,7 +63,7 @@ $(document).ready(function () {
 
         const observer = new MutationObserver(() => {
             if (overlayDiv.classList.contains('show')) {
-                const alto = screen.width;
+                const alto = window.innerWidth;
                 const heightContenidoPrincipal = overlayDiv.offsetHeight;
                 const heightSobre = tamanioSobre.offsetHeight;
                 let tamanioContenidoPrincipal = 0;
@@ -65,36 +98,96 @@ $(document).ready(function () {
         }, 200);
     }
 
-    $("#confirmacion").click(function () {
-        Swal.fire({
-            title: "¿Asistirá a la boda?",
-            // text: "A continuación se abrirá WhatsApp para confirmar asistencia",
-            icon: "info",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Si",
-            cancelButtonText: "No"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                Swal.fire({
-                    position: "center",
-                    icon: "success",
-                    title: "Confirmación aceptada",
-                    text: "Se abrirá su WhatsApp para confirmar su asistencia con la organizadora del evento.",
-                    showConfirmButton: false,
-                    timer: 4500,
-                    willClose: () => {
-                        confirmacionAsistencia();
-                    }
-                });
-            }
-        });
-    });
+    // $("#confirmacion").click(function () {
+
+    //     Swal.fire({
+    //         title: '¿Asistirá a la boda?',
+    //         html: `
+    //           <div style="text-align: left;">
+    //             <label>
+    //               <input type="checkbox" id="nombre1"> Nombre 1
+    //             </label><br>
+    //             <label>
+    //               <input type="checkbox" id="nombre2"> Nombre 2
+    //             </label>
+    //           </div>
+    //         `,
+    //         showCancelButton: true,
+    //         confirmButtonText: 'Sí',
+    //         cancelButtonText: 'No',
+    //         confirmButtonColor: '#3085d6', // Color azul para el botón de "Sí"
+    //         cancelButtonColor: '#d33', // Color rojo para el botón de "No"
+    //         preConfirm: () => {
+    //             const nombre1 = document.getElementById('nombre1').checked;
+    //             const nombre2 = document.getElementById('nombre2').checked;
+
+    //             if (!nombre1 && !nombre2) {
+    //                 Swal.showValidationMessage('Debes seleccionar al menos uno');
+    //             }
+
+    //             return { nombre1, nombre2 };
+    //         }
+    //     }).then((result) => {
+    //         if (result.isConfirmed) {
+    //             Swal.fire(
+    //                 'Confirmado',
+    //                 `Asistirán: ${result.value.nombre1 ? 'Nombre 1' : ''} ${result.value.nombre2 ? 'Nombre 2' : ''}`,
+    //                 'success'
+    //             );
+    //         } else if (result.dismiss === Swal.DismissReason.cancel) {
+    //             Swal.fire('Cancelado', 'No asistirá a la boda', 'error');
+    //         }
+    //     });
+
+    //     // Swal.fire({
+    //     //     title: "¿Asistirá a la boda?",
+    //     //     // text: "A continuación se abrirá WhatsApp para confirmar asistencia",
+    //     //     icon: "info",
+    //     //     showCancelButton: true,
+    //     //     confirmButtonColor: "#3085d6",
+    //     //     cancelButtonColor: "#d33",
+    //     //     confirmButtonText: "Si",
+    //     //     cancelButtonText: "No"
+    //     // }).then((result) => {
+    //     //     if (result.isConfirmed) {
+    //     //         Swal.fire({
+    //     //             position: "center",
+    //     //             icon: "success",
+    //     //             title: "Confirmación aceptada",
+    //     //             text: "Se abrirá su WhatsApp para confirmar su asistencia con la organizadora del evento.",
+    //     //             showConfirmButton: false,
+    //     //             timer: 4500,
+    //     //             willClose: () => {
+    //     //                 confirmacionAsistencia();
+    //     //             }
+    //     //         });
+    //     //     }
+    //     // });
+
+    //     //         const { value: formValues } = await Swal.fire({
+    //     //   title: "Multiple inputs",
+    //     //   html: `
+    //     //     <input id="swal-input1" class="swal2-input">
+    //     //     <input id="swal-input2" class="swal2-input">
+    //     //   `,
+    //     //   focusConfirm: false,
+    //     //   preConfirm: () => {
+    //     //     return [
+    //     //       document.getElementById("swal-input1").value,
+    //     //       document.getElementById("swal-input2").value
+    //     //     ];
+    //     //   }
+    //     // });
+    //     // if (formValues) {
+    //     //   Swal.fire(JSON.stringify(formValues));
+    //     // }
+    // });
 
     function confirmacionAsistencia() {
         console.log("Se realiza confirmacion de invitacion")
     }
+
+
 
 
     function ajusteAlturaMesaRegalo(altura, tamanioDiv) {
@@ -105,13 +198,13 @@ $(document).ready(function () {
             { min: 351, max: 375, ajuste: 35 },
             { min: 376, max: 400, ajuste: 55 },
             { min: 401, max: 425, ajuste: 65 },
-            { min: 426, max: 450, ajuste: 70 },
-            { min: 451, max: 475, ajuste: 80 },
-            { min: 476, max: 500, ajuste: 85 },
-            { min: 501, max: 525, ajuste: 90 },
-            { min: 526, max: 550, ajuste: 100 },
-            { min: 551, max: 575, ajuste: 110 },
-            { min: 576, max: 600, ajuste: 115 },
+            { min: 426, max: 450, ajuste: -5 },
+            { min: 451, max: 475, ajuste: -5 },
+            { min: 476, max: 500, ajuste: 0 },
+            { min: 501, max: 525, ajuste: 5 },
+            { min: 526, max: 550, ajuste: 15 },
+            { min: 551, max: 575, ajuste: 20 },
+            { min: 576, max: 600, ajuste: 25 },
             { min: 601, max: 625, ajuste: 125 },
             { min: 626, max: 650, ajuste: 145 },
             { min: 651, max: 675, ajuste: 150 },
@@ -243,5 +336,121 @@ $(document).ready(function () {
     }
 
 
+    const listaNombres =[] ;
+    // Al hacer clic en el botón, se abrirá el modal con los nombres de la lista
+    document.getElementById('confirmacion').addEventListener('click', function () {
+        abrirModalConNombres(listaNombres);
+    });
+
 
 });
+
+function copyText(id) {
+    let elem = document.getElementById(id);
+    if (elem) {
+        let text = elem.textContent || elem.innerText;
+
+        // Intentar copiar con la API moderna del portapapeles
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert(`Clabe Interbancaria copiada: ${text}`);
+            }).catch(err => {
+                console.error('Error al copiar al portapapeles: ', err);
+                fallbackCopyTextToClipboard(text);
+            });
+        } else {
+            // Si la API moderna no está disponible, usar el método alternativo
+            fallbackCopyTextToClipboard(text);
+        }
+    } else {
+        console.error('Elemento no encontrado');
+    }
+}
+
+function fallbackCopyTextToClipboard(text) {
+    // Crear un elemento de texto temporal
+    let textArea = document.createElement("textarea");
+    textArea.value = text;
+    textArea.style.position = 'fixed'; // Evitar desplazamiento de la página
+    document.body.appendChild(textArea);
+    textArea.select();
+
+    try {
+        let successful = document.execCommand('copy');
+        if (successful) {
+            alert(`Clabe Interbancaria copiada: ${text}`);
+        } else {
+            console.error('No se pudo copiar el texto usando execCommand.');
+        }
+    } catch (err) {
+        console.error('Error al copiar al portapapeles con el método alternativo: ', err);
+    }
+
+    // Limpiar el área de texto
+    document.body.removeChild(textArea);
+}
+
+
+function abrirModalConNombres(nombres) {
+    // Generar HTML dinámico basado en la lista de nombres, los checks estarán marcados por defecto
+    let checkboxesHtml = '';
+    nombres.forEach((nombre, index) => {
+        checkboxesHtml += `
+        <label>
+          <input type="checkbox" id="nombre${index}" checked> ${nombre}
+        </label><br>
+      `;
+    });
+
+    // Abrir el modal de SweetAlert2
+    Swal.fire({
+        title: '¿Asistirá a la boda?',
+        html: `
+        <div style="text-align: left;">
+          ${checkboxesHtml}
+          <p style="font-size: 12px; margin-top: 10px;">
+            En caso de no poder asistir, quita la marca del nombre. 
+            Ten en cuenta que el pase no se puede ceder a otro.
+          </p>
+        </div>
+      `,
+        showCancelButton: true,
+        confirmButtonText: 'Sí',
+        cancelButtonText: 'No',
+        confirmButtonColor: '#3085d6', // Botón azul
+        cancelButtonColor: '#d33', // Botón rojo
+        preConfirm: () => {
+            // Crear un objeto con los nombres seleccionados (true/false)
+            let seleccionados = {};
+            nombres.forEach((nombre, index) => {
+                seleccionados[nombre] = document.getElementById(`nombre${index}`).checked;
+            });
+
+            // Validar que al menos un nombre esté seleccionado
+            if (!Object.values(seleccionados).some(checked => checked)) {
+                Swal.showValidationMessage('Debes seleccionar al menos uno');
+            }
+
+            // Devolver el objeto con los resultados
+            return seleccionados;
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            console.log('Resultado de la selección:', result.value);
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Confirmación aceptada",
+                text: "Se abrirá su WhatsApp para confirmar su asistencia con la organizadora del evento.",
+                showConfirmButton: false,
+                timer: 4500,
+                willClose: () => {
+                    confirmacionAsistencia();
+                }
+            });
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+            Swal.fire('Cancelado', 'No asistirá a la boda', 'error');
+        }
+    });
+}
+

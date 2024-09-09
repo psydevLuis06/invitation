@@ -1,3 +1,7 @@
+<?php
+$id = isset($_GET['code']) ? $_GET['code'] : null;
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -17,7 +21,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/custom.css">
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
 
     <link rel="stylesheet" href="css/font-awesome.min.css">
@@ -97,6 +101,18 @@
         }
 
 
+        /* .overlay-div {
+            width: 80%;
+            min-height: 150px;
+            background-image: url(images/background2.avif);
+            position: absolute;
+            top: -14rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(-200%);
+            padding: 10px;
+            box-sizing: border-box;
+            opacity: 0;
+        } */
         .overlay-div {
             width: 80%;
             min-height: 150px;
@@ -110,19 +126,45 @@
             opacity: 0;
         }
 
-        .new-div {
+        /* .new-div {
             position: absolute;
             left: 50%;
-            /* bottom: -100%; */
             transform: translateX(-50%) translateY(98.9%);
             width: 55%;
             min-height: 190px;
             background-color: #fff;
-            /* padding: 10px; */
+            box-sizing: border-box;
+            background-image: url(images/background2.avif);
+            box-shadow: 0 17px 25px rgba(0, 0, 0, 1.2);
+        } */
+
+        .new-div {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%) translateY(98.9%);
+            width: 55%;
+            min-height: 190px;
+            height: auto;
+            background-color: #fff;
             box-sizing: border-box;
             background-image: url(images/background2.avif);
             box-shadow: 0 17px 25px rgba(0, 0, 0, 1.2);
         }
+
+        /* .new-div {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50%;
+            min-height: 190px;
+            height: auto;
+            background-color: #fff;
+            box-sizing: border-box;
+            background-image: url(images/background2.avif);
+            box-shadow: 0 17px 25px rgba(0, 0, 0, 1.2);
+            bottom: 0;
+            margin-bottom: 20px;
+        } */
 
         .segment {
             padding: 10px;
@@ -163,6 +205,10 @@
 
         p {
             margin-bottom: 0 !important;
+        }
+
+        #ContenidoRegalo {
+            margin-top: 5%;
         }
 
         /* Media Queries */
@@ -299,6 +345,7 @@
 </head>
 
 <body id="home" data-spy="scroll" data-target="#navbar-wd" data-offset="98">
+    <input type="hidden" id="code" value="<?= $id ?>">
     <!-- LOADER Parametrizar-->
     <div id="preloader">
         <div class="preloader pulse">
@@ -316,17 +363,17 @@
         </div>
         <div class="overlay-div principal-columns" id="overlayDiv">
             <div class="segment" style="padding-top: 30px;">
-                <p style="text-align: center;">Aqui debe de ir algo </p>
+                <p style="text-align: center;" class="CooperLight">Con la bendición de Dios y nuestros padres: </p>
                 <br>
                 <div class="parents">
-                    <p>Carolina Ventura Garrido</p>
-                    <p>Ruvi Luz Arellano Zuñiga</p>
+                    <p class="CooperBook">Carolina Ventura Garrido</p>
+                    <p class="CooperBook">Ruvi Luz Arellano Zuñiga</p>
                 </div>
 
                 <div class="parents">
 
-                    <p><img src="images/cruz.png" id="cruz"> Rodolfo Ozuna Gutierrez</p>
-                    <p>José Raúl de León García</p>
+                    <p class="CooperBook"><img src="images/cruz.png" id="cruz"> Rodolfo Ozuna Gutierrez</p>
+                    <p class="CooperBook">José Raúl de León García</p>
                 </div>
             </div>
             <div class="segment" id="novios">
@@ -337,7 +384,7 @@
                         <h1>Alexia Ozuna</h1>
                         <h1>&</h1>
                         <h1>Luis De León</h1>
-                        <h2>¡Nos vamos a casar!</h3>
+                        <h2 class="CooperLight">¡Nos vamos a casar!</h3>
                     </div>
                 </div>
             </div>
@@ -351,29 +398,14 @@
                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 item">
                             <div class="caption">
                                 <div class="star center-block">
-                                    <span class="h3">26</span>
-                                    <span>Agosto </span>
-                                    <span>2014</span>
-                                </div>
-                                <div class="image">
-                                    <img src="images/times-01.jpg" alt />
-                                    <div class="title">
-                                        <h2>Primer encuentro </h2>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 item">
-                            <div class="caption">
-                                <div class="star center-block">
-                                    <span class="h3">03</span>
-                                    <span>April</span>
-                                    <span>2017</span>
+                                    <span class="h6 CooperLight">26</span>
+                                    <span class="CooperLight">Agosto </span>
+                                    <span class="CooperLight">2014</span>
                                 </div>
                                 <div class="image">
                                     <img src="images/times-02.jpg" alt />
                                     <div class="title">
-                                        <h2>Primera Cita </h2>
+                                        <h2 class="CooperLight">Primer encuentro </h2>
                                     </div>
                                 </div>
                             </div>
@@ -381,14 +413,29 @@
                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 item">
                             <div class="caption">
                                 <div class="star center-block">
-                                    <span class="h3">03</span>
-                                    <span>May</span>
-                                    <span>2017</span>
+                                    <span class="h6 CooperLight">05</span>
+                                    <span class="CooperLight">Septiembre</span>
+                                    <span class="CooperLight">2014</span>
+                                </div>
+                                <div class="image">
+                                    <img src="images/times-01.jpg" alt />
+                                    <div class="title">
+                                        <h2 class="CooperLight">Primera Cita </h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 item">
+                            <div class="caption">
+                                <div class="star center-block">
+                                    <span class="h6 CooperLight">22</span>
+                                    <span class="CooperLight">Septiembre</span>
+                                    <span class="CooperLight">2023</span>
                                 </div>
                                 <div class="image">
                                     <img src="images/propuesta.jpg" alt />
                                     <div class="title">
-                                        <h2>Nos Comprometimos </h2>
+                                        <h2 class="CooperLight">Nos Comprometimos </h2>
                                     </div>
                                 </div>
                             </div>
@@ -396,43 +443,18 @@
                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 item">
                             <div class="caption">
                                 <div class="star center-block">
-                                    <span class="h3">04</span>
-                                    <span>June</span>
-                                    <span>2017</span>
+                                    <span class="h6 CooperLight">09</span>
+                                    <span class="CooperLight">Noviembre</span>
+                                    <span class="CooperLight">2024</span>
                                 </div>
                                 <div class="image">
                                     <img src="images/times-04.jpg" alt />
                                     <div class="title">
-                                        <h2>Nuestra Boda </h2>
+                                        <h2 class="CooperLight">Nuestra Boda </h2>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 item">
-                            <div class="caption">
-                                <div class="star center-block">
-                                    <span class="h3">04</span>
-                                    <span>July</span>
-                                    <span>2017</span>
-                                </div>
-                                <div class="image">
-                                    <img src="images/time-05.jpg" alt />
-                                    <div class="title">
-                                        <h2>My Wedding </h2>
-                                    </div>
-                                </div>
-                                <div class="textContent">
-                                    <p class="lead">Since then i came to
-                                        Austria as refugee far from my
-                                        lovers and
-                                        friends far a way escaping from wars
-                                        and threats searching a new life
-                                        that i
-                                        didn't find until yet.</p>
-                                </div>
-                            </div>
-                        </div> -->
-
                     </div>
                 </div>
             </div>
@@ -447,9 +469,8 @@
                             <div class="col-lg-12">
                                 <div class="title-box">
                                     <h2>¡Nuestra Boda!</h2>
-                                    <p>El día más esperado de nuestras vidas
-                                        finalmente ha llegado. (Nombre
-                                        invitado) acompañanos en nuestra
+                                    <p class="CooperLight">El día más esperado de nuestras vidas
+                                        finalmente ha llegado. <spam id="nombreInvitados" class="nombreInvitado" ></spam> acompañanos en nuestra
                                         boda y se parte de esta historia.
                                     </p>
                                 </div>
@@ -458,21 +479,18 @@
                                 <div id="cuenta"></div>
                             </div>
                         </div>
-
                         <div class="row">
-
                             <div class="col-md-6 col-sm-6">
                                 <div class="serviceBox">
                                     <div class="service-icon"><i class="flaticon-reception-bell"></i></div>
                                     <h3 class="title">Recepción</h3>
                                     <h4>09 Noviembre 2024 a las 06:00
                                         pm</h4>
-                                    <p class="description">
+                                    <p class="description CooperBook" style="font-weight: 750 !important;">
                                         <!-- Acompáñanos a celebrar nuestra unión en una recepción llena de amor, alegría y felicidad en el Jardín El Pedregal. -->
                                         <i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;Jardín
                                         El Pedregal.
                                     </p>
-                                    <!-- <span class="space"></span > -->
                                     <br class="space">
                                 </div>
                             </div>
@@ -498,81 +516,124 @@
                 </div>
             </div>
             <div class="segment" style="position: relative;">
-                <div>
-                    <h2 style="text-align: center;">Hemos reservado</h2>
-                </div>
-                <div class="center-btn" style="margin-bottom: 10px;">
-                    <div class="inner"
-                        style="width: 50px; height: 50px; border: 4px solid #08554C; display: flex; justify-content: center;">
-                        <p style="font-size: 20px;" id="num-pases">1</p>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="title-box">
+                            <h2 style="text-align: center;">Hemos Reservado</h2>
+                            <div class="center-btn" style="margin-bottom: 10px;">
+                                <div class="inner"
+                                    style="width: 50px; height: 50px; border: 4px solid #08554C; display: flex; justify-content: center;">
+                                    <p style="font-size: 20px;" id="num-pases"></p>
+                                </div>
+                            </div>
+                            <p style="text-align: center;"> PASES EN SU LUGAR</p>
+                            <br>
+                            <p style="text-align: center;"> RESPETUOSAMENTE NO NIÑOS,</p>
+                            <p style="text-align: center;">LOS ADORAMOS PERO CREEMOS QUE SE MERECEN UNA NOCHE LIBRE.</p>
+                        </div>
                     </div>
                 </div>
-                <p style="text-align: center;"> PASES EN SU LUGAR</p>
-                <br>
-                <p style="text-align: center;"> ADORAMOS A LOS NIÑOS PERO
-                    CREEMOS QUE SE MERECEN UNA NOCHE LIBRE.
-                </p>
-
-                <h1 style="text-align: center;">Código de Vestimenta</h1>
-                <div class="center-btn">
-                    <br>
-                    <img class="hide-bg" src="images/dresscode2.png" width="100px" height="100px">
+                
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="title-box">
+                            <h2 style="text-align: center;">Código de Vestimenta</h2>
+                            <div class="center-btn">
+                                <br>
+                                <img class="hide-bg" src="images/dresscode2.png" width="100px" height="100px">
+                            </div>
+                            <p style="text-align: center;">FORMAL</p>
+                            <!-- <p style="text-align: center;">El blanco es un color hermoso, pero en nuestra boda, es exclusivo para la novia, y el verde esmeralda para las damas.</p> -->
+                            <p style="text-align: center;" class="CooperLight">El blanco es un color
+                                hermoso, pero en nuestra boda es exclusivo para la
+                                novia, y el verde esmeralda, para las damas.</p>
+                            <p style="text-align: center;" class="CooperLight">¡Todos los demás colores
+                                están disponibles.!</p>
+                        </div>
+                    </div>
                 </div>
-                <p style="text-align: center;">FORMAL</p>
-                <!-- <p style="text-align: center;">El blanco es un color hermoso, pero en nuestra boda, es exclusivo para la novia, y el verde esmeralda para las damas.</p> -->
-                <p style="text-align: center;">El blanco es un color
-                    hermoso, pero en nuestra boda es exclusivo para la
-                    novia, y el verde esmeralda, para las damas.</p>
-                <p style="text-align: center;">¡Todos los demás colores
-                    están disponibles.!</p>
-
             </div>
             <div class="segment asistencia">
-                <h1 style="text-align: center;">Confirmar asistencia</h1>
-                <h2 style="text-align: center;">Antes del 15 de Septiembre
-                    2024</h2>
-                <div class="center-btn">
-                    <!-- <a href="https://wa.me/523327834905?text=I'm%20interested%20in%20your%20car%20for%20sale"
-                        class="btn btn-green btn-lg" tabindex="-1" role="button" aria-disabled="true">CLICK AQUI</a> -->
-                    <button class="btn btn-green btn-lg" id="confirmacion"> CLICK AQUI</button>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="title-box">
+                            <h2 style="text-align: center;">Confirmar Asistencia</h2>
+                            <h3 style="text-align: center;">Antes del 05 de Octubre
+                                2024</h3>
+                            <div class="center-btn" style="display: inline-grid;">
+                                <!-- <a href="https://wa.me/523327834905?text=I'm%20interested%20in%20your%20car%20for%20sale"
+                                        class="btn btn-green btn-lg" tabindex="-1" role="button" aria-disabled="true">CLICK AQUI</a> -->
+                                <button class="btn btn-green btn-lg" id="confirmacion"> CLICK AQUI</button>
 
-                </div>
-                <p style="text-align: center; font-size: 10px; margin-top: 10px;">AGRADECEMOS
-                    NOS CONFIRMES TU ASISTENCIA </p>
-                <p style="text-align: center; font-size: 10px;">TU PRESENCIA
-                    ES IMPORTANTE PARA NOSOTROS</p>
-
-                <div class="center-btn qrcode">
-                    <canvas id="qr-code"></canvas>
-                    <!-- <img src="images/qr.png"> -->
+                                <p style="text-align: center; font-size: 10px; margin-top: 10px;">AGRADECEMOS
+                                    NOS CONFIRMES TU ASISTENCIA </p>
+                                <p style="text-align: center; font-size: 10px;">TU PRESENCIA
+                                    ES IMPORTANTE PARA NOSOTROS</p>
+                                <div class="center-btn qrcode">
+                                    <canvas id="qr-code"></canvas>
+                                    <!-- <img src="images/qr.png"> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
             </div>
         </div>
         <div class="new-div principal-columns" id="newDiv">
-            <div
+            <div id="RegaloImg"
                 style="width: 100%; border-radius: 50%; overflow: hidden; display: flex; justify-content: center; align-items: center;">
                 <img src="images/regalo.png" class="regalo hide-bg">
             </div>
-            <div class="gift-div">
-                <div class="center-btn">
-                    <p>LIVERPOOL</p>
-                </div>
-                <div class="center-btn">
-                    <a href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/51380099"
-                        class="btn btn-green btn-lg" tabindex="-1" role="button" aria-disabled="true">VER MESA</a>
-                </div>
-                <div class="center-btn">
-                    <p>AMAZON</p>
-                </div>
-                <div class="center-btn">
-                    <a href="https://www.amazon.com.mx/wedding/share/BodaAlexiaOzunayLuisDeLeon"
-                        class="btn btn-green btn-lg" tabindex="-1" role="button" aria-disabled="true">VER MESA</a>
+
+            <div class="row" id="ContenidoRegalo">
+                <div class="col-lg-12">
+                    <div class="title-box">
+                        <h2 style="text-align: center;">Regalos</h2>
+                       
+                        <p style="text-align: center; padding: 0px 15px 0px 15px;" class="CooperLight"> Nuestro mejor regalo es tu compañía en este día tan especial. Sin embargo, si deseas hacernos un obsequio, te agradeceríamos que lo hicieras a través de nuestra mesa de regalos o a las siguientes cuentas: </p>
+                        <div class="center-btn" style="display: block !important; padding-top:10px;">
+                            <p class="CooperBook">Alexia Ozuna</p>
+                            <p>BBVA</p>
+                        </div>
+                        <div class="center-btn">
+                            <a id="BrideAccount" class="btn btn-green btn-lg" onclick="copyText('BrideAccount')"
+                                tabindex="0" role="button" aria-disabled="true">0121 8001 5347 565952</a>
+                        </div>
+                        <div class="center-btn" style="display: block !important;">
+                            <p class="CooperBook">Luis de León</p>
+                            <p>BBVA</p>
+                        </div>
+                        <div class="center-btn">
+                            <a id="GroomAccount" class="btn btn-green btn-lg" onclick="copyText('GroomAccount')"
+                                tabindex="0" role="button" aria-disabled="true">0121 8001 5614 770726</a>
+                        </div>
+                        <br class="spaces">
+                        <div class="center-btn">
+                            <p class="CooperBook">LIVERPOOL</p>
+                        </div>
+                        <div class="center-btn">
+                            <a href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/51380099"
+                                class="btn btn-green btn-lg" tabindex="-1" role="button" aria-disabled="true">VER MESA</a>
+                        </div>
+                        <div class="center-btn">
+                            <p class="CooperBook">AMAZON</p>
+                        </div>
+                        <div class="center-btn">
+                            <a href="https://www.amazon.com.mx/wedding/share/BodaAlexiaOzunayLuisDeLeon"
+                                class="btn btn-green btn-lg" tabindex="-1" role="button" aria-disabled="true">VER MESA</a>
+                        </div>
+                    
+                        <!-- </div> -->
+                    </div>
                 </div>
             </div>
+
         </div>
         <br>
     </div>
+
+
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -581,12 +642,13 @@
 
     <script src="https://cdn.jsdelivr.net/npm/qrious@latest/dist/qrious.min.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        
-        
+
+
+
     </script>
     <!-- ALL JS FILES -->
-    <script src="js/principal.js"></script>
     <script src="js/jquery.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -603,6 +665,8 @@
     <!-- controlador de timer -->
     <script src="js/simplyCountdown.min.js"></script>
     <script src="js/countdown.js"></script>
+    <!-- <script src="js/principal.js?v=<?php echo time();?>"></script> -->
+    <script src="js/principal.js?"></script>
 </body>
 
 </html>

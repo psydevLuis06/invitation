@@ -1,102 +1,183 @@
 $(document).ready(function () {
-
-    var mensaje = "Prueba de desarrollo";
-
-    // Crear una instancia de QRious
-    var qr = new QRious({
-        element: document.getElementById('qr-code'),
-        value: mensaje,
-        size: 150,
-        level: 'H'  // Nivel de corrección de errores (L, M, Q, H)
-    });
-
+    let code = '';
+    
     function cargaDatos() {
+
+        const alto = window.innerWidth;
+
+        $("#alto").text(alto);
+
         const codeValue = document.getElementById('code').value;
+        code = codeValue;
+        // Crear una instancia de QRious
+        var qr = new QRious({
+            element: document.getElementById('qr-code'),
+            value: codeValue,
+            size: 150,
+            level: 'H'  // Nivel de corrección de errores (L, M, Q, H)
+        });
+    
         $.ajax({
             type: 'POST',
             url: '_ajax/_ajax.php',
+            async: true,
             data: {
                 obtenerInfoInvitados: 1,
                 code: codeValue
             },
             success: function (data) {
-                console.log(data);
                 const jsonData = JSON.parse(data); // Decodificar el JSON
-                console.log(jsonData); 
-                var totalInvitados = jsonData.length;
-                if(totalInvitados == 1){
-                    var cadenaNombre = jsonData[0].nombre + ' ' + jsonData[0].App;
-                    listaNombres.push(cadenaNombre);
-                    $("#nombreInvitados").text(cadenaNombre);
+                let totalInvitados = jsonData[0].cantidad;
+                let cadenaNombre = '';
+                if(jsonData[0].esFamilia == 1){
+                    cadenaNombre = jsonData[0].nombre;
                 }else{
-
+                    if(totalInvitados == 1){
+                        cadenaNombre = jsonData[0].nombre + ' ' + jsonData[0].App;
+                        // listaNombres.push(cadenaNombre);
+                    }else{
+                        cadenaNombre = concatenateArray(jsonData,"nombre", "App");
+                    }
                 }
+            
+
+                $("#nombreInvitados").text(cadenaNombre);
 
                 $("#num-pases").text(totalInvitados);
 
-                console.log(jsonData.nombre);
-                console.log('Data sent successfully!');
+              
             },
             error: function (xhr, status, error) {
                 console.log('Error sending data: ' + error);
             }
         });
     }
+   
+    
+    
+//   function handleClick() {
+//     const button = document.getElementById('myButton');
+//     // Añadir la clase 'active' para el efecto de clic
+//     button.classList.add('active');
+
+//     // Eliminar la clase 'active' después de un pequeño retraso
+//     setTimeout(() => {
+//         button.classList.remove('active');
+//     }, 200); // 200 ms es suficiente para simular el efecto de clic
+
+//     const overlayDiv = document.getElementsByClassName('overlay-div')[0];
+//     const tamanioSobre = document.getElementsByClassName('centered-div')[0];
+
+//     const observer = new MutationObserver(() => {
+//         if (overlayDiv.classList.contains('show')) {
+//             const alto = window.innerWidth;
+//             const heightContenidoPrincipal = overlayDiv.offsetHeight;
+//             const heightSobre = tamanioSobre.offsetHeight;
+//             let tamanioContenidoPrincipal = 0;
+//             let posicionAlturaContenidoPrincipal = 0;
+//             let posicionAlturaSello = 0;
+
+
+            
+//             $("#alto").text(alto);
+//             if (alto >= 768 && alto <= 1024) {
+//                 posicionAlturaContenidoPrincipal = ajusteAlturaContenidoTablets(alto, heightSobre);
+//                 tamanioContenidoPrincipal = ajusteAlturaMesaRegaloTablets(alto, heightContenidoPrincipal);
+//                 posicionAlturaSello = ajusteAlturaLogoTablets(alto, heightSobre);
+//                 $(".circular-button").attr("style", "top: " + 60 + "% !important; width: " + 120 + "px !important;height: " + 120 + "px !important;");
+//                 $(".logo-boton").attr("style", "top: " + posicionAlturaSello + "% !important;width: " + 100 + "px !important;height: " + 100 + "px !important;");
+
+//             } else if (alto < 768) {
+//                 console.log(pixelsToRem(heightContenidoPrincipal));
+//                 // tamanioContenidoPrincipal = ajusteAlturaMesaRegalo(alto, heightContenidoPrincipal);
+//                 posicionAlturaContenidoPrincipal = ajusteAlturaContenido(alto, heightSobre);
+//                 posicionAlturaSello = ajusteAlturaLogo(alto, heightSobre);
+//                 // tamanioContenidoPrincipal = pixelsToRem(bottom)-30;
+//                 $(".logo-boton").attr("style", "top: " + posicionAlturaSello + "% !important;");
+//             }
+//             let rect ='';
+//             let bottom = '';
+//             // rectSobre = tamanioSobre.getBoundingClientRect();
+//             // bottomSobre = rectSobre.bottom;
+//             rect = overlayDiv.getBoundingClientRect();
+//             bottom = (rect.bottom)-bottomSobre;
+//             prueba = pixelsToRem(bottom);
+//             $("#overlayDiv").css({ top: posicionAlturaContenidoPrincipal + 'px' });
+//             $(".new-div").css({ top: prueba + 'rem' });
+//             // $(".logo-boton").css({ top: posicionAlturaSello + '% !important' });
+//             cargaDatos();
+
+
+//             // const rect = overlayDiv.getBoundingClientRect();
+//             // const bottom = rect.bottom;
+//             console.log(`La altura del borde inferior del elemento overlayDiv es de ${bottom}px`);
+//             observer.disconnect();
+//         }
+//     });
+//     observer.observe(overlayDiv, { attributes: true });
+//     setTimeout(() => {
+//         button.classList.remove('active');
+//         overlayDiv.classList.toggle('show');
+//     }, 200);
+// }
+
+
+
+function handleClick() {
+    const button = document.getElementById('myButton');
+
+    // Añadir la clase 'active' para el efecto de clic
+    button.classList.add('active');
+
+    // Eliminar la clase 'active' después de un pequeño retraso
+    setTimeout(() => {
+        button.classList.remove('active');
+    }, 200); // 200 ms es suficiente para simular el efecto de clic
+
+    const overlayDiv = document.getElementsByClassName('overlay-div')[0];
+    const tamanioSobre = document.getElementsByClassName('centered-div')[0];
+
+    const observer = new MutationObserver(() => {
+        if (overlayDiv.classList.contains('show')) {
+            const alto = window.innerWidth;
+            const heightContenidoPrincipal = overlayDiv.offsetHeight;
+            const heightSobre = tamanioSobre.offsetHeight;
+            let tamanioContenidoPrincipal = 0;
+            let posicionAlturaContenidoPrincipal = 0;
+            let posicionAlturaSello = 0;
+            $("#alto").text(alto);
+            if (alto >= 768 && alto <= 1024) {
+                posicionAlturaContenidoPrincipal = ajusteAlturaContenidoTablets(alto, heightSobre);
+                tamanioContenidoPrincipal = ajusteAlturaMesaRegaloTablets(alto, heightContenidoPrincipal);
+                posicionAlturaSello = ajusteAlturaLogoTablets(alto, heightSobre);
+                $(".circular-button").attr("style", "top: " + 60 + "% !important; width: " + 120 + "px !important;height: " + 120 + "px !important;");
+                $(".logo-boton").attr("style", "top: " + posicionAlturaSello + "% !important;width: " + 100 + "px !important;height: " + 100 + "px !important;");
+
+            }
+            else if (alto < 768) {
+                tamanioContenidoPrincipal = ajusteAlturaMesaRegalo(alto, heightContenidoPrincipal);
+                posicionAlturaContenidoPrincipal = ajusteAlturaContenido(alto, heightSobre);
+                posicionAlturaSello = ajusteAlturaLogo(alto, heightSobre);
+                $(".logo-boton").attr("style", "top: " + posicionAlturaSello + "% !important;");
+            }
+            $("#overlayDiv").css({ top: posicionAlturaContenidoPrincipal + 'px' });
+            $(".new-div").css({ top: tamanioContenidoPrincipal + 'px' });
+            // $(".logo-boton").css({ top: posicionAlturaSello + '% !important' });
+            cargaDatos()
+            observer.disconnect();
+        }
+    });
+    observer.observe(overlayDiv, { attributes: true });
+    setTimeout(() => {
+        button.classList.remove('active');
+        overlayDiv.classList.toggle('show');
+    }, 200);
+}
+cargaDatos();
+
 
     
-    handleClick();
-    cargaDatos();
-
-    function handleClick() {
-        const button = document.getElementById('myButton');
-
-        // Añadir la clase 'active' para el efecto de clic
-        button.classList.add('active');
-
-        // Eliminar la clase 'active' después de un pequeño retraso
-        setTimeout(() => {
-            button.classList.remove('active');
-        }, 200); // 200 ms es suficiente para simular el efecto de clic
-
-        const overlayDiv = document.getElementsByClassName('overlay-div')[0];
-        const tamanioSobre = document.getElementsByClassName('centered-div')[0];
-
-        const observer = new MutationObserver(() => {
-            if (overlayDiv.classList.contains('show')) {
-                const alto = window.innerWidth;
-                const heightContenidoPrincipal = overlayDiv.offsetHeight;
-                const heightSobre = tamanioSobre.offsetHeight;
-                let tamanioContenidoPrincipal = 0;
-                let posicionAlturaContenidoPrincipal = 0;
-                let posicionAlturaSello = 0;
-                $("#alto").text(alto);
-                if (alto >= 768 && alto <= 1024) {
-                    posicionAlturaContenidoPrincipal = ajusteAlturaContenidoTablets(alto, heightSobre);
-                    tamanioContenidoPrincipal = ajusteAlturaMesaRegaloTablets(alto, heightContenidoPrincipal);
-                    posicionAlturaSello = ajusteAlturaLogoTablets(alto, heightSobre);
-                    $(".circular-button").attr("style", "top: " + 60 + "% !important; width: " + 120 + "px !important;height: " + 120 + "px !important;");
-                    $(".logo-boton").attr("style", "top: " + posicionAlturaSello + "% !important;width: " + 100 + "px !important;height: " + 100 + "px !important;");
-
-                }
-                else if (alto < 768) {
-                    tamanioContenidoPrincipal = ajusteAlturaMesaRegalo(alto, heightContenidoPrincipal);
-                    posicionAlturaContenidoPrincipal = ajusteAlturaContenido(alto, heightSobre);
-                    posicionAlturaSello = ajusteAlturaLogo(alto, heightSobre);
-                    $(".logo-boton").attr("style", "top: " + posicionAlturaSello + "% !important;");
-                }
-                $("#overlayDiv").css({ top: posicionAlturaContenidoPrincipal + 'px' });
-                $(".new-div").css({ top: tamanioContenidoPrincipal + 'px' });
-                // $(".logo-boton").css({ top: posicionAlturaSello + '% !important' });
-
-                observer.disconnect();
-            }
-        });
-        observer.observe(overlayDiv, { attributes: true });
-        setTimeout(() => {
-            button.classList.remove('active');
-            overlayDiv.classList.toggle('show');
-        }, 200);
-    }
+    // handleClick();
 
     // $("#confirmacion").click(function () {
 
@@ -196,15 +277,15 @@ $(document).ready(function () {
             { min: 300, max: 325, ajuste: 10 },
             { min: 326, max: 350, ajuste: 25 },
             { min: 351, max: 375, ajuste: 35 },
-            { min: 376, max: 400, ajuste: 55 },
+            { min: 376, max: 400, ajuste: -400 },
             { min: 401, max: 425, ajuste: 65 },
             { min: 426, max: 450, ajuste: -5 },
             { min: 451, max: 475, ajuste: -5 },
-            { min: 476, max: 500, ajuste: 0 },
+            { min: 476, max: 500, ajuste: -150 },
             { min: 501, max: 525, ajuste: 5 },
             { min: 526, max: 550, ajuste: 15 },
             { min: 551, max: 575, ajuste: 20 },
-            { min: 576, max: 600, ajuste: 25 },
+            { min: 576, max: 600, ajuste: -280 },
             { min: 601, max: 625, ajuste: 125 },
             { min: 626, max: 650, ajuste: 145 },
             { min: 651, max: 675, ajuste: 150 },
@@ -336,10 +417,10 @@ $(document).ready(function () {
     }
 
 
-    const listaNombres =[] ;
+   
     // Al hacer clic en el botón, se abrirá el modal con los nombres de la lista
     document.getElementById('confirmacion').addEventListener('click', function () {
-        abrirModalConNombres(listaNombres);
+        abrirModalConNombres();
     });
 
 
@@ -391,8 +472,24 @@ function fallbackCopyTextToClipboard(text) {
 }
 
 
-function abrirModalConNombres(nombres) {
+function abrirModalConNombres() {
     // Generar HTML dinámico basado en la lista de nombres, los checks estarán marcados por defecto
+    $.ajax({
+        type: 'POST',
+        url: '_ajax/_ajax.php',
+        data: {
+            obtenerInfoInvitados: 1,
+            code: codeValue
+        },
+        success: function (data) {
+           
+        },
+        error: function (xhr, status, error) {
+            console.log('Error sending data: ' + error);
+        }
+    });
+
+
     let checkboxesHtml = '';
     nombres.forEach((nombre, index) => {
         checkboxesHtml += `
@@ -454,3 +551,20 @@ function abrirModalConNombres(nombres) {
     });
 }
 
+function concatenateArray(arr, nombre, app) {
+    if (arr.length === 0) return '';
+    if (arr.length === 1) return `${arr[0][nombre]} ${arr[0][app]}`;
+  
+    let result = '';
+    for (let i = 0; i < arr.length - 1; i++) {
+      result += `${arr[i][nombre]} ${arr[i][app]}${i === arr.length - 2 ? ' y ' : ', '}`;
+    }
+    result += `${arr[arr.length - 1][nombre]} ${arr[arr.length - 1][app]}`;
+  
+    return result;
+  }
+
+  function pixelsToRem(px) {
+    const rootFontSize = 16; // assuming 16px as the root font size
+    return `${px / rootFontSize}`;
+  }

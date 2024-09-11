@@ -4,7 +4,9 @@
 
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800');
 @import url('https://fonts.googleapis.com/css?family=Engagement');
-
+@import url('https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Great+Vibes&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
 /*------------------------------------------------------------------
     IMPORT FILES
 -------------------------------------------------------------------*/
@@ -15,10 +17,40 @@
 @import url(responsiveslides.css);
 @import url(timeline.css);
 @import url(flaticon.css);
+@import url(flaticon.css);
 
+
+@font-face {
+    font-family: 'CooperLight';
+    src: url('../fonts/CooperHewitt-Light.otf') format('opentype');
+    font-style: normal;   /* También puedes ajustar el estilo aquí */
+}
+@font-face {
+    font-family: 'CooperBook';
+    src: url('../fonts/CooperHewitt-Book.otf') format('opentype');
+    font-style: normal;   /* También puedes ajustar el estilo aquí */
+}
 /*------------------------------------------------------------------
     SKELETON
 -------------------------------------------------------------------*/
+.CooperLight{
+	font-family: 'CooperLight' !important;
+	font-weight: 600 !important;  
+	
+}
+
+.CooperBook{
+	font-family: 'CooperBook' !important;
+	font-weight: 600 !important;  
+}
+
+.nombreInvitado {
+	font-size: 18px;
+	font-family: 'Dancing Script', cursive;
+	font-weight: 600 !important;  
+	color: #08554C;
+}
+
 
 body {
 	color: #666666;
@@ -214,7 +246,8 @@ button:focus {
 
 .pulse h3 {
 	color: #ffffff;
-	font-family: 'Engagement', cursive;
+	font-family: 'Alex Brush', cursive;
+	/* font-family: 'Great Vibes', cursive; */
 	font-size: 38px;
 }
 
@@ -437,7 +470,7 @@ button:focus {
 
 .lbox-details h1 {
 	font-size: 54px;
-	font-family: 'Engagement', cursive;
+	font-family: 'Alex Brush', cursive;
 	color: #08554C;
 	position: relative;
 	z-index: 3;
@@ -590,7 +623,7 @@ button:focus {
 
 .title-box h2 {
 	font-size: 60px;
-	font-family: 'Engagement', cursive;
+	font-family: 'Dancing Script', cursive;
 	color: #222222;
 }
 
@@ -1254,3 +1287,4 @@ select.form-control:not([size]):not([multiple]) {
 	transform: translateY(-50%);
 	width: 100%;
 }
+

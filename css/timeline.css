@@ -2293,7 +2293,7 @@
 	box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.5); 
 }
 .timeLine .row .item .caption .star {
-	width: 50px;
+	width: min-content;
 	padding: 5px 0px;
 	font-weight: bold;
 	line-height: 15px;

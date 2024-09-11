@@ -27,6 +27,8 @@ $id = isset($_GET['code']) ? $_GET['code'] : null;
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <style>
         /* Estilos generales */
+
+
         .container {
             max-width: 100% !important;
             display: flex;
@@ -101,76 +103,13 @@ $id = isset($_GET['code']) ? $_GET['code'] : null;
         }
 
 
-        /* .overlay-div {
-            width: 80%;
-            min-height: 150px;
-            background-image: url(images/background2.avif);
-            position: absolute;
-            top: -14rem;
-            left: 50%;
-            transform: translateX(-50%) translateY(-200%);
-            padding: 10px;
-            box-sizing: border-box;
-            opacity: 0;
-        } */
-        .overlay-div {
-            width: 80%;
-            min-height: 150px;
-            background-image: url(images/background2.avif);
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%) translateY(-200%);
-            padding: 10px;
-            box-sizing: border-box;
-            opacity: 0;
-        }
+
 
         .row {
             justify-content: center;
             background-image: url(images/background2.avif);
 
         }
-
-        /* .new-div {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%) translateY(98.9%);
-            width: 55%;
-            min-height: 190px;
-            background-color: #fff;
-            box-sizing: border-box;
-            background-image: url(images/background2.avif);
-            box-shadow: 0 17px 25px rgba(0, 0, 0, 1.2);
-        } */
-
-        .new-div {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%) translateY(98.9%);
-            width: 55%;
-            min-height: 190px;
-            height: auto;
-            background-color: #fff;
-            box-sizing: border-box;
-            background-image: url(images/background2.avif);
-            box-shadow: 0 17px 25px rgba(0, 0, 0, 1.2);
-        }
-
-        /* .new-div {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50%;
-            min-height: 190px;
-            height: auto;
-            background-color: #fff;
-            box-sizing: border-box;
-            background-image: url(images/background2.avif);
-            box-shadow: 0 17px 25px rgba(0, 0, 0, 1.2);
-            bottom: 0;
-            margin-bottom: 20px;
-        } */
 
         .segment {
             padding: 10px;
@@ -310,9 +249,9 @@ $id = isset($_GET['code']) ? $_GET['code'] : null;
                 border: 1p;
             }
 
-            /* .logo-boton {
+            .logo-boton {
                 top: 68%;
-            } */
+            }
 
             .overlay-div {
                 width: 80%;
@@ -372,7 +311,7 @@ $id = isset($_GET['code']) ? $_GET['code'] : null;
             <button class="circular-button" id="myButton"></button>
             <img class="logo-boton" id="FotoBanner" src="images/a&l.jpeg" alt="Foto representativa de mi Banner">
         </div>
-        <div class="col-10 mx-auto sombra">
+        <div class="col-10 mx-auto sombra" style="top: -2rem;">
             <div class="row ">
 
                 <div class="segment" style="padding-top: 30px;">
@@ -491,7 +430,8 @@ $id = isset($_GET['code']) ? $_GET['code'] : null;
                                     <div class="title-box">
                                         <h2>¡Nuestra Boda!</h2>
                                         <p class="CooperLight">El día más esperado de nuestras vidas
-                                            finalmente ha llegado. <spam id="nombreInvitados" class="nombreInvitado"></spam> acompañanos en nuestra
+                                            finalmente ha llegado. <br>
+                                            <spam id="nombreInvitados" class="nombreInvitado"></spam> <br> acompañanos en nuestra
                                             boda y se parte de esta historia.
                                         </p>
                                     </div>
